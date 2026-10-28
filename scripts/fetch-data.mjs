@@ -18,6 +18,10 @@ const TICKERS = [
   'XOM','CVX','COP','OXY','CAT','BA','GE','HON','UPS','LMT','DE',
   // telecom e auto
   'T','VZ','F','GM','BABA',
+  // small cap (ETF e titoli)
+  'IJR','IWO','IWN','VB','XRT','KRE','JETS','TAN','URA','LIT',
+  'PLUG','FCEL','MARA','RIOT','GPRO','UEC','CLF','X','AAL','NCLH','M','KSS','GME','AMC','BB','NOK','SIRI','PENN','WYNN',
+  'TLRY','CGC','SAVA','CRSP','HL','CDE','AG','FSLR','ENPH','SEDG','RIG','CCL','SWN','VALE','BYND','CHWY','ZM',
   '^VIX','^IRX'];
 
 async function fetchTicker(t) {

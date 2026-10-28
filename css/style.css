@@ -307,3 +307,5 @@ button { cursor: pointer; }
 .cond-row .inp { width: 84px; }
 .cond-row .x { background: none; border: 0; color: var(--dim); font-size: 16px; padding: 0 6px; }
 .cond-row .x:hover { color: var(--sell); }
+
+.w-row .sc { font: 600 8.5px var(--mono); font-style: normal; color: var(--accent); border: 1px solid currentColor; border-radius: 2px; padding: 0 3px; margin-left: 5px; vertical-align: middle; }

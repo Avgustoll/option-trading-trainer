@@ -29,6 +29,8 @@ const BOT_PRESETS = [
     tp: 50, sl: 200, xdte: 14, maxOpen: 2, cool: 7, risk: 2 },
   { name: 'Long call su incrocio SMA 50', syms: 'ETF', conds: [{ k: 'x50up', op: '>', v: 0 }], strat: 'long_call', dte: 60, width: 2, delta: 0.3,
     tp: 100, sl: 50, xdte: 14, maxOpen: 3, cool: 10, risk: 1 },
+  { name: 'Bull put su small cap in ipervenduto', syms: 'SMALL', conds: [{ k: 'rsi', op: '<', v: 30 }, { k: 'ivr', op: '>', v: 40 }], strat: 'bull_put', dte: 30, width: 2, delta: 0.2,
+    tp: 50, sl: 150, xdte: 14, maxOpen: 4, cool: 10, risk: 1 },
   { name: 'Short strangle su titoli ad alta IV', syms: 'ALL', conds: [{ k: 'ivr', op: '>', v: 75 }, { k: 'ivhv', op: '>', v: 1.15 }], strat: 'short_strangle', dte: 45, width: 2, delta: 0.16,
     tp: 50, sl: 200, xdte: 21, maxOpen: 3, cool: 15, risk: 3 },
   { name: 'Straddle su VIX estremo', syms: 'SPY', conds: [{ k: 'vix', op: '>', v: 30 }], strat: 'short_straddle', dte: 30, width: 2, delta: 0.25,
@@ -116,9 +118,11 @@ const tradableSyms = () => Market.index.filter(x => !HIDDEN.has(x.symbol)).map(x
 function botUniverse(syms) {
   if (syms === 'ALL') return tradableSyms();
   if (syms === 'ETF') return ETF_LIST.filter(s => Market.series[s]);
+  if (syms === 'SMALL') return SMALL_LIST.filter(s => Market.series[s]);
+  if (syms === 'LARGE') return tradableSyms().filter(s => !ETF_LIST.includes(s) && !SMALL.has(s));
   return Market.series[syms] ? [syms] : [];
 }
-const symsLabel = syms => (syms === 'ALL' ? `Tutti (${tradableSyms().length})` : syms === 'ETF' ? `ETF (${ETF_LIST.length})` : syms);
+const symsLabel = syms => (syms === 'ALL' ? `Tutti (${tradableSyms().length})` : syms === 'ETF' ? `ETF (${ETF_LIST.length})` : syms === 'SMALL' ? `Small cap (${SMALL_LIST.length})` : syms === 'LARGE' ? 'Large cap' : syms);
 
 /* ---------- esecuzione ---------- */
 function botLog(rule, sym, msg) {
@@ -273,7 +277,7 @@ function toggleBot() {
 function ruleModal(existing) {
   stopPlay();
   const draft = existing ? JSON.parse(JSON.stringify(existing)) : newRule();
-  const symOpts = [['ALL', 'Tutti i titoli e ETF'], ['ETF', 'Solo ETF'], ...tradableSyms().map(s => [s, s])];
+  const symOpts = [['ALL', 'Tutti i titoli e ETF'], ['SMALL', 'Solo small cap'], ['LARGE', 'Solo large cap'], ['ETF', 'Solo ETF'], ...tradableSyms().map(s => [s, s])];
   const opt = (v, l, cur) => `<option value="${v}" ${String(v) === String(cur) ? 'selected' : ''}>${l}</option>`;
   const condRows = () => draft.conds.map((cd, i) => {
     const ev = METRIC[cd.k].ev;

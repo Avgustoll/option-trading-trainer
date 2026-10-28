@@ -29,7 +29,7 @@ Riscarica gli ultimi 10 anni da Yahoo Finance in `data/`. Per aggiungere titoli 
 ## Trader automatico
 Scheda **Automazioni** + pulsante **Bot** nella barra del tempo. Ogni regola dice: *se* [condizioni] *allora* apri [strategia].
 - Condizioni (tutte insieme): IV Rank, IV, IV/HV, RSI 14, variazione 1/5 giorni, distanza dal massimo a 52 settimane, prezzo vs SMA 50/200, VIX, incroci delle medie, nuovi massimi/minimi.
-- Titoli: uno solo, solo ETF oppure tutti.
+- Titoli: uno solo, solo ETF, solo small cap, solo large cap oppure tutti.
 - Ingresso: strategia, scadenza target, larghezza, delta, dimensione (contratti fissi o % di capitale a rischio), max posizioni, pausa tra aperture.
 - Uscita: target profit, stop loss (% del premio) e chiusura a DTE.
 - Le regole si valutano al close di ogni giorno simulato, anche con avanzamenti di settimane o mesi. “Verifica oggi” mostra su quali titoli la regola scatterebbe.

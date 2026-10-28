@@ -304,7 +304,7 @@ function renderWatch() {
     const c = s.c[i], ch = c / s.c[Math.max(0, i - 1)] - 1;
     const tradable = !HIDDEN.has(x.symbol);
     return `<div class="w-row ${x.symbol === App.sym ? 'on' : ''}" data-sym="${x.symbol}" ${tradable ? '' : 'data-ro="1"'} title="${esc(x.name)}">
-      <span class="s">${x.symbol.replace('^', '')}${held.has(x.symbol) ? '<i class="posdot"></i>' : ''}</span><span class="p">${NF2.format(c)}</span>
+      <span class="s">${x.symbol.replace('^', '')}${SMALL.has(x.symbol) ? '<i class="sc" title="Small cap">SC</i>' : ''}${held.has(x.symbol) ? '<i class="posdot"></i>' : ''}</span><span class="p">${NF2.format(c)}</span>
       <span class="n">${esc(x.name)}</span><span class="c ${cls(ch)}">${pct(ch)}</span></div>`;
   }).join('');
 }
@@ -815,7 +815,8 @@ function renderPages() {
 
 function newPageModal() {
   stopPlay();
-  const groups = [['ETF e indici', x => ETF_LIST.includes(x.symbol)], ['Titoli', x => !ETF_LIST.includes(x.symbol)]];
+  const groups = [['ETF e indici', x => ETF_LIST.includes(x.symbol)], ['Titoli large cap', x => !ETF_LIST.includes(x.symbol) && !SMALL.has(x.symbol)],
+    ['Small cap (ETF e titoli)', x => SMALL.has(x.symbol)]];
   const items = Market.index.filter(x => !HIDDEN.has(x.symbol));
   const draw = q => {
     const f = q.trim().toLowerCase();

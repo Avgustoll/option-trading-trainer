@@ -4,8 +4,14 @@
 const MULT = 100;
 const LIQUID = new Set(['SPY', 'QQQ', 'IWM', 'DIA', 'XLF', 'XLE', 'XLK', 'GLD', 'TLT', 'HYG', 'EEM', 'AAPL', 'MSFT', 'NVDA', 'AMZN', 'TSLA']);
 const ETF_LIST = ['SPY', 'QQQ', 'IWM', 'DIA', 'SMH', 'XBI', 'ARKK', 'EEM', 'EFA', 'HYG', 'TLT', 'GLD', 'SLV', 'USO', 'XLF', 'XLE', 'XLK', 'XLV', 'XLY', 'XLP', 'XLI', 'XLU'];
-const ETF_STRIKES = new Set(ETF_LIST);
+const SMALL_ETF = ['IJR', 'IWO', 'IWN', 'VB', 'XRT', 'KRE', 'JETS', 'TAN', 'URA', 'LIT'];
+const SMALL_STOCKS = ['PLUG', 'FCEL', 'MARA', 'RIOT', 'GPRO', 'UEC', 'CLF', 'AAL', 'NCLH', 'M', 'KSS', 'GME', 'AMC', 'BB', 'NOK', 'SIRI', 'PENN', 'WYNN',
+  'CGC', 'CRSP', 'HL', 'CDE', 'AG', 'FSLR', 'ENPH', 'SEDG', 'RIG', 'CCL', 'VALE'];
+const SMALL_LIST = [...SMALL_ETF, ...SMALL_STOCKS];
+const SMALL = new Set(SMALL_LIST);
+const ETF_STRIKES = new Set([...ETF_LIST, ...SMALL_ETF]);
 const NON_EQUITY = new Set(['GLD', 'TLT', 'SLV', 'USO', 'HYG', 'EEM', 'EFA']);
+const SMALL_ETF_SET = new Set(SMALL_ETF);
 const HIDDEN = new Set(['^VIX', '^IRX']);
 
 const Market = { index: [], series: {}, calendar: [] };
@@ -224,7 +230,8 @@ function quote(sym, date, type, K, expiry, Sover) {
   if (T <= 0) { bid = ask = mid; }
   else if (mid < 0.005) { bid = 0; ask = 0.01; }
   else {
-    const w = LIQUID.has(sym) ? Math.max(0.01, 0.01 + mid * 0.012) : Math.max(0.02, 0.02 + mid * 0.03);
+    const w = LIQUID.has(sym) ? Math.max(0.01, 0.01 + mid * 0.012)
+      : SMALL.has(sym) ? Math.max(0.05, 0.04 + mid * 0.06) : Math.max(0.02, 0.02 + mid * 0.03);
     bid = Math.max(0, Math.floor((mid - w / 2) * 100) / 100);
     ask = Math.max(0.01, Math.ceil((mid + w / 2) * 100) / 100);
   }
