@@ -28,7 +28,7 @@ Riscarica gli ultimi 10 anni da Yahoo Finance in `data/`. Per aggiungere titoli 
 
 ## Trader automatico
 Scheda **Automazioni** + pulsante **Bot** nella barra del tempo. Ogni regola dice: *se* [condizioni] *allora* apri [strategia].
-- Condizioni (tutte insieme): IV Rank, IV, IV/HV, RSI 14, variazione 1/5 giorni, distanza dal massimo a 52 settimane, prezzo vs SMA 50/200, VIX, incroci delle medie, nuovi massimi/minimi.
+- Condizioni (tutte insieme): IV Rank, IV, IV/HV, RSI 14, variazione 1/5 giorni, distanza dal massimo a 52 settimane, prezzo vs SMA 50/200, VIX, incroci delle medie, nuovi massimi/minimi, e per la coppia SMA 20/50: incrocio (golden/death cross), giorni dall incrocio, distanza (con segno e assoluta) e sua variazione in 5 giorni.
 - Titoli: uno solo, solo ETF, solo small cap, solo large cap oppure tutti.
 - Ingresso: strategia, scadenza target, larghezza, delta, dimensione (contratti fissi o % di capitale a rischio), max posizioni, pausa tra aperture.
 - Uscita: target profit, stop loss (% del premio) e chiusura a DTE.

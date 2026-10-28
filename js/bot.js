@@ -12,7 +12,13 @@ const METRICS = [
   { k: 'dd', label: 'Distanza dal massimo 52 sett. (%)', def: -10 },
   { k: 'sma50', label: 'Prezzo vs SMA 50 (%)', def: 0 },
   { k: 'sma200', label: 'Prezzo vs SMA 200 (%)', def: 0 },
+  { k: 'd2050', label: 'Distanza SMA 20 vs SMA 50 (%, con segno)', def: 3 },
+  { k: 'd2050abs', label: 'Distanza assoluta tra SMA 20 e SMA 50 (%)', def: 0.6 },
+  { k: 'd2050chg', label: 'Variazione distanza SMA20/50 in 5 giorni (punti %)', def: 0 },
+  { k: 'reg2050', label: 'Giorni dall\'incrocio SMA20/50 (+ sopra, − sotto)', def: 5 },
   { k: 'vix', label: 'VIX', def: 25 },
+  { k: 'x2050up', label: 'SMA 20 incrocia SOPRA la SMA 50 (golden cross)', ev: true },
+  { k: 'x2050dn', label: 'SMA 20 incrocia SOTTO la SMA 50 (death cross)', ev: true },
   { k: 'x50up', label: 'Il prezzo incrocia SOPRA la SMA 50', ev: true },
   { k: 'x50dn', label: 'Il prezzo incrocia SOTTO la SMA 50', ev: true },
   { k: 'x200up', label: 'Il prezzo incrocia SOPRA la SMA 200', ev: true },
@@ -23,6 +29,16 @@ const METRICS = [
 const METRIC = Object.fromEntries(METRICS.map(m => [m.k, m]));
 
 const BOT_PRESETS = [
+  { name: 'SMA 20/50: trend rialzista appena nato', syms: 'ETF', conds: [{ k: 'reg2050', op: '>', v: 0 }, { k: 'reg2050', op: '<', v: 6 }, { k: 'd2050chg', op: '>', v: 0 }],
+    strat: 'bull_call', dte: 45, width: 3, delta: 0.3, tp: 100, sl: 50, xdte: 14, maxOpen: 3, cool: 10, risk: 1 },
+  { name: 'SMA 20/50: trend ribassista appena nato', syms: 'ETF', conds: [{ k: 'reg2050', op: '<', v: 0 }, { k: 'reg2050', op: '>', v: -6 }, { k: 'd2050chg', op: '<', v: 0 }],
+    strat: 'bear_put', dte: 45, width: 3, delta: 0.3, tp: 100, sl: 50, xdte: 14, maxOpen: 3, cool: 10, risk: 1 },
+  { name: 'SMA 20/50: medie troppo distanti sopra (+5%)', syms: 'LARGE', conds: [{ k: 'd2050', op: '>', v: 5 }],
+    strat: 'bear_call', dte: 30, width: 3, delta: 0.2, tp: 50, sl: 200, xdte: 14, maxOpen: 3, cool: 10, risk: 1.5 },
+  { name: 'SMA 20/50: medie troppo distanti sotto (−5%)', syms: 'LARGE', conds: [{ k: 'd2050', op: '<', v: -5 }],
+    strat: 'bull_put', dte: 30, width: 3, delta: 0.2, tp: 50, sl: 200, xdte: 14, maxOpen: 3, cool: 10, risk: 1.5 },
+  { name: 'SMA 20/50: compressione e IV bassa (straddle)', syms: 'ETF', conds: [{ k: 'd2050abs', op: '<', v: 0.6 }, { k: 'ivr', op: '<', v: 30 }],
+    strat: 'long_straddle', dte: 45, width: 2, delta: 0.25, tp: 50, sl: 40, xdte: 14, maxOpen: 2, cool: 15, risk: 1.5 },
   { name: 'Iron condor con IV alta', syms: 'SPY', conds: [{ k: 'ivr', op: '>', v: 50 }], strat: 'iron_condor', dte: 45, width: 5, delta: 0.16,
     tp: 50, sl: 200, xdte: 21, maxOpen: 2, cool: 10, risk: 2 },
   { name: 'Bull put dopo un calo', syms: 'QQQ', conds: [{ k: 'rsi', op: '<', v: 35 }, { k: 'sma200', op: '>', v: 0 }], strat: 'bull_put', dte: 30, width: 3, delta: 0.25,
@@ -76,7 +92,14 @@ function inds(sym) {
     for (let j = Math.max(0, i - 251); j <= i; j++) { if (iv[j] > h) h = iv[j]; if (iv[j] < l) l = iv[j]; }
     ivr[i] = h > l ? (iv[i] - l) / (h - l) * 100 : 50;
   }
-  return (IndCache[sym] = { s50: smaArr(c, 50), s200: smaArr(c, 200), rsi: rsiArr(c), hi, lo, ivr, iv });
+  const s20 = smaArr(c, 20), s50 = smaArr(c, 50);
+  const d = new Float64Array(n).fill(NaN), reg = new Float64Array(n).fill(NaN);
+  for (let i = 49; i < n; i++) {
+    d[i] = (s20[i] / s50[i] - 1) * 100;
+    const sg = d[i] >= 0 ? 1 : -1;
+    reg[i] = i > 49 && Math.sign(reg[i - 1]) === sg ? reg[i - 1] + sg : sg;
+  }
+  return (IndCache[sym] = { s20, s50, s200: smaArr(c, 200), rsi: rsiArr(c), hi, lo, ivr, iv, d, reg });
 }
 
 function metric(sym, k, date) {
@@ -93,6 +116,12 @@ function metric(sym, k, date) {
     case 'dd': return (c[i] / Math.max(I.hi[i], c[i]) - 1) * 100;
     case 'sma50': return (c[i] / I.s50[i] - 1) * 100;
     case 'sma200': return (c[i] / I.s200[i] - 1) * 100;
+    case 'd2050': return I.d[i];
+    case 'd2050abs': return Math.abs(I.d[i]);
+    case 'd2050chg': return i >= 5 ? I.d[i] - I.d[i - 5] : NaN;
+    case 'reg2050': return I.reg[i];
+    case 'x2050up': return I.d[i - 1] < 0 && I.d[i] >= 0 ? 1 : 0;
+    case 'x2050dn': return I.d[i - 1] >= 0 && I.d[i] < 0 ? 1 : 0;
     case 'vix': { const v = Market.series['^VIX']; return v.c[Math.max(0, atOrBefore(v, date))]; }
     case 'x50up': return c[i - 1] < I.s50[i - 1] && c[i] >= I.s50[i] ? 1 : 0;
     case 'x50dn': return c[i - 1] > I.s50[i - 1] && c[i] <= I.s50[i] ? 1 : 0;
