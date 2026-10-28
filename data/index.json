@@ -1,0 +1,639 @@
+[
+ {
+  "symbol": "SPY",
+  "file": "SPY.json",
+  "name": "State Street SPDR S&P 500 ETF Trust",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "QQQ",
+  "file": "QQQ.json",
+  "name": "Invesco QQQ Trust",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "IWM",
+  "file": "IWM.json",
+  "name": "iShares Russell 2000 ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "DIA",
+  "file": "DIA.json",
+  "name": "State Street SPDR Dow Jones Industrial Average ETF Trust",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "SMH",
+  "file": "SMH.json",
+  "name": "VanEck Semiconductor ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XBI",
+  "file": "XBI.json",
+  "name": "State Street SPDR S&P Biotech ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "ARKK",
+  "file": "ARKK.json",
+  "name": "ARK Innovation ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "EEM",
+  "file": "EEM.json",
+  "name": "iShares MSCI Emerging Markets ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "EFA",
+  "file": "EFA.json",
+  "name": "iShares MSCI EAFE ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "HYG",
+  "file": "HYG.json",
+  "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "TLT",
+  "file": "TLT.json",
+  "name": "iShares 20+ Year Treasury Bond ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "GLD",
+  "file": "GLD.json",
+  "name": "SPDR Gold Shares",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "SLV",
+  "file": "SLV.json",
+  "name": "iShares Silver Trust",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "USO",
+  "file": "USO.json",
+  "name": "United States Oil Fund, LP",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLF",
+  "file": "XLF.json",
+  "name": "State Street Financial Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLE",
+  "file": "XLE.json",
+  "name": "State Street Energy Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLK",
+  "file": "XLK.json",
+  "name": "State Street Technology Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLV",
+  "file": "XLV.json",
+  "name": "State Street Health Care Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLY",
+  "file": "XLY.json",
+  "name": "State Street Consumer Discretionary Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLP",
+  "file": "XLP.json",
+  "name": "State Street Consumer Staples Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLI",
+  "file": "XLI.json",
+  "name": "State Street Industrial Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XLU",
+  "file": "XLU.json",
+  "name": "State Street Utilities Select Sector SPDR ETF",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "AAPL",
+  "file": "AAPL.json",
+  "name": "Apple Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "MSFT",
+  "file": "MSFT.json",
+  "name": "Microsoft Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "NVDA",
+  "file": "NVDA.json",
+  "name": "NVIDIA Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "AMZN",
+  "file": "AMZN.json",
+  "name": "Amazon.com, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "GOOGL",
+  "file": "GOOGL.json",
+  "name": "Alphabet Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "META",
+  "file": "META.json",
+  "name": "Meta Platforms, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "TSLA",
+  "file": "TSLA.json",
+  "name": "Tesla, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "AMD",
+  "file": "AMD.json",
+  "name": "Advanced Micro Devices, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "NFLX",
+  "file": "NFLX.json",
+  "name": "Netflix, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "INTC",
+  "file": "INTC.json",
+  "name": "Intel Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "CSCO",
+  "file": "CSCO.json",
+  "name": "Cisco Systems, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "ORCL",
+  "file": "ORCL.json",
+  "name": "Oracle Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "CRM",
+  "file": "CRM.json",
+  "name": "Salesforce, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "ADBE",
+  "file": "ADBE.json",
+  "name": "Adobe Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "QCOM",
+  "file": "QCOM.json",
+  "name": "QUALCOMM Incorporated",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "AVGO",
+  "file": "AVGO.json",
+  "name": "Broadcom Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "TXN",
+  "file": "TXN.json",
+  "name": "Texas Instruments Incorporated",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "MU",
+  "file": "MU.json",
+  "name": "Micron Technology, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "IBM",
+  "file": "IBM.json",
+  "name": "International Business Machines Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "PYPL",
+  "file": "PYPL.json",
+  "name": "PayPal Holdings, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "SHOP",
+  "file": "SHOP.json",
+  "name": "Shopify Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "JPM",
+  "file": "JPM.json",
+  "name": "JPMorgan Chase & Co.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "BAC",
+  "file": "BAC.json",
+  "name": "Bank of America Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "WFC",
+  "file": "WFC.json",
+  "name": "Wells Fargo & Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "GS",
+  "file": "GS.json",
+  "name": "The Goldman Sachs Group, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "MS",
+  "file": "MS.json",
+  "name": "Morgan Stanley",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "C",
+  "file": "C.json",
+  "name": "Citigroup Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "V",
+  "file": "V.json",
+  "name": "Visa Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "MA",
+  "file": "MA.json",
+  "name": "Mastercard Incorporated",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "AXP",
+  "file": "AXP.json",
+  "name": "American Express Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "BRK-B",
+  "file": "BRK-B.json",
+  "name": "Berkshire Hathaway Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "WMT",
+  "file": "WMT.json",
+  "name": "Walmart Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "COST",
+  "file": "COST.json",
+  "name": "Costco Wholesale Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "HD",
+  "file": "HD.json",
+  "name": "The Home Depot, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "LOW",
+  "file": "LOW.json",
+  "name": "Lowe's Companies, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "TGT",
+  "file": "TGT.json",
+  "name": "Target Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "NKE",
+  "file": "NKE.json",
+  "name": "NIKE, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "MCD",
+  "file": "MCD.json",
+  "name": "McDonald's Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "SBUX",
+  "file": "SBUX.json",
+  "name": "Starbucks Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "KO",
+  "file": "KO.json",
+  "name": "The Coca-Cola Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "PEP",
+  "file": "PEP.json",
+  "name": "PepsiCo, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "PG",
+  "file": "PG.json",
+  "name": "The Procter & Gamble Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "DIS",
+  "file": "DIS.json",
+  "name": "The Walt Disney Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "JNJ",
+  "file": "JNJ.json",
+  "name": "Johnson & Johnson",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "PFE",
+  "file": "PFE.json",
+  "name": "Pfizer Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "MRK",
+  "file": "MRK.json",
+  "name": "Merck & Co., Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "ABBV",
+  "file": "ABBV.json",
+  "name": "AbbVie Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "UNH",
+  "file": "UNH.json",
+  "name": "UnitedHealth Group Incorporated",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "LLY",
+  "file": "LLY.json",
+  "name": "Eli Lilly and Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "AMGN",
+  "file": "AMGN.json",
+  "name": "Amgen Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "GILD",
+  "file": "GILD.json",
+  "name": "Gilead Sciences, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "XOM",
+  "file": "XOM.json",
+  "name": "ExxonMobil Holdings Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "CVX",
+  "file": "CVX.json",
+  "name": "Chevron Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "COP",
+  "file": "COP.json",
+  "name": "ConocoPhillips",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "OXY",
+  "file": "OXY.json",
+  "name": "Occidental Petroleum Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "CAT",
+  "file": "CAT.json",
+  "name": "Caterpillar Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "BA",
+  "file": "BA.json",
+  "name": "The Boeing Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "GE",
+  "file": "GE.json",
+  "name": "GE Aerospace",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "HON",
+  "file": "HON.json",
+  "name": "Honeywell International Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "UPS",
+  "file": "UPS.json",
+  "name": "United Parcel Service, Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "LMT",
+  "file": "LMT.json",
+  "name": "Lockheed Martin Corporation",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "DE",
+  "file": "DE.json",
+  "name": "Deere & Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "T",
+  "file": "T.json",
+  "name": "AT&T Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "VZ",
+  "file": "VZ.json",
+  "name": "Verizon Communications Inc.",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "F",
+  "file": "F.json",
+  "name": "Ford Motor Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "GM",
+  "file": "GM.json",
+  "name": "General Motors Company",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "BABA",
+  "file": "BABA.json",
+  "name": "Alibaba Group Holding Limited",
+  "from": "2016-10-28",
+  "to": "2026-10-27"
+ },
+ {
+  "symbol": "^VIX",
+  "file": "VIX.json",
+  "name": "CBOE Volatility Index",
+  "from": "2016-10-28",
+  "to": "2026-10-28"
+ },
+ {
+  "symbol": "^IRX",
+  "file": "IRX.json",
+  "name": "13 WEEK TREASURY BILL",
+  "from": "2016-10-27",
+  "to": "2026-10-27"
+ }
+]

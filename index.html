@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Option Trading Trainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%222%22 fill=%22%23e04848%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="loading" class="loading">
+  <div class="loading-box">
+    <div class="brand-mark">OT</div>
+    <div>Caricamento dati storici… <span id="loadPct">0%</span></div>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">OT</span><span class="brand-name">Option Trading Trainer</span><span class="brand-tag">SIMULATO</span></div>
+  <div class="acct" id="acct"></div>
+  <button class="btn ghost" id="btnNew" type="button">Nuova simulazione</button>
+</header>
+
+<div class="timebar">
+  <div class="time-ctrl">
+    <button class="btn" id="back1" type="button" title="Giorno precedente">◀ 1G</button>
+    <label class="date-wrap" for="datePick"><span class="date-dow" id="dateDow"></span><input type="date" id="datePick"></label>
+    <button class="btn" id="fwd1" type="button" title="Giorno successivo (→)">1G ▶</button>
+    <button class="btn" id="fwd5" type="button" title="Settimana successiva (Shift →)">1S ▶</button>
+    <button class="btn" id="fwd21" type="button" title="Mese successivo">1M ▶</button>
+    <button class="btn play" id="play" type="button">▶ Play</button>
+    <select id="speed" class="sel" title="Velocità riproduzione">
+      <option value="1000">1 g/s</option><option value="400" selected>2,5 g/s</option><option value="150">7 g/s</option>
+    </select>
+  </div>
+  <div class="time-info" id="timeInfo"></div>
+</div>
+
+<nav class="pagebar" id="pagebar" aria-label="Pagine"></nav>
+
+<main class="mosaic">
+  <!-- WATCHLIST -->
+  <section class="panel watch">
+    <div class="panel-h"><span>Watchlist</span></div>
+    <input type="search" id="watchFilter" class="inp wfilter" placeholder="Cerca simbolo" autocomplete="off" aria-label="Cerca simbolo">
+    <div class="watch-list" id="watch"></div>
+  </section>
+
+  <!-- CHART -->
+  <section class="panel chartp">
+    <div class="quote-h" id="quoteH"></div>
+    <div class="chart-tools">
+      <div class="seg" id="tfSeg">
+        <button type="button" data-tf="D">G</button><button type="button" data-tf="W">S</button><button type="button" data-tf="M">M</button>
+      </div>
+      <div class="seg" id="rangeSeg">
+        <button type="button" data-r="1M">1M</button><button type="button" data-r="3M">3M</button><button type="button" data-r="6M">6M</button>
+        <button type="button" data-r="1Y">1A</button><button type="button" data-r="3Y">3A</button><button type="button" data-r="ALL">Tutto</button>
+      </div>
+      <div class="seg toggles" id="indSeg">
+        <button type="button" data-i="sma20">SMA 20</button><button type="button" data-i="sma50">SMA 50</button>
+        <button type="button" data-i="sma200">SMA 200</button><button type="button" data-i="bb">Bollinger</button>
+        <button type="button" data-i="em">Exp. Move</button><button type="button" data-i="pos">Strike pos.</button>
+      </div>
+    </div>
+    <div class="chart-legend" id="legend"></div>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <!-- OPTION CHAIN -->
+  <section class="panel chain">
+    <div class="panel-h">
+      <span>Option Chain <b id="chainSym"></b></span>
+      <label class="mini">Strike <select id="strikesEach" class="sel">
+        <option value="6">±6</option><option value="10" selected>±10</option><option value="16">±16</option><option value="25">±25</option>
+      </select></label>
+    </div>
+    <div class="exp-tabs" id="expTabs"></div>
+    <div class="chain-wrap"><table class="chain-t" id="chainT"></table></div>
+    <div class="chain-foot">Clic su <span class="tag buy">ASK</span> = compra · clic su <span class="tag sell">BID</span> = vendi. Prezzi teorici Black‑Scholes al close, IV simulata da VIX e volatilità storica.</div>
+  </section>
+
+  <!-- STRATEGY BUILDER -->
+  <section class="panel ticket">
+    <div class="panel-h"><span>Strategy Builder</span><span class="mini" id="ticketSym"></span></div>
+    <div class="ticket-body">
+      <div class="strats" id="strats"></div>
+      <div class="params">
+        <label>Larghezza <select id="pWidth" class="sel">
+          <option value="1">1 strike</option><option value="2" selected>2 strike</option><option value="3">3 strike</option>
+          <option value="5">5 strike</option><option value="10">10 strike</option></select></label>
+        <label>Delta short <select id="pDelta" class="sel">
+          <option value="0.10">0,10</option><option value="0.16">0,16</option><option value="0.20">0,20</option>
+          <option value="0.25" selected>0,25</option><option value="0.30">0,30</option><option value="0.40">0,40</option></select></label>
+        <label>Quantità <input type="number" id="pQty" class="inp" min="1" max="500" value="1"></label>
+      </div>
+      <div class="legs" id="legs"></div>
+      <div class="order-row">
+        <div class="seg" id="modeSeg">
+          <button type="button" data-m="mid">Mid</button><button type="button" data-m="nat">Natural</button><button type="button" data-m="lmt">Limite</button>
+        </div>
+        <input type="text" inputmode="decimal" id="pLimit" class="inp lmt" placeholder="Limite" hidden>
+        <div class="combo-px" id="comboPx"></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="payoff-h" id="payoffH"></div>
+      <div class="payoff-wrap"><canvas id="payoff"></canvas><div class="payoff-tip" id="payoffTip" hidden></div></div>
+      <div class="ticket-actions">
+        <button class="btn ghost" id="btnClear" type="button">Pulisci</button>
+        <button class="btn transmit" id="btnSend" type="button">Trasmetti ordine</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="panel port">
+    <div class="panel-h tabs" id="bottomTabs">
+      <button type="button" data-t="pos">Portafoglio</button>
+      <button type="button" data-t="closed">Chiuse</button>
+      <button type="button" data-t="trades">Eseguiti</button>
+      <button type="button" data-t="equity">Equity</button>
+    </div>
+    <div class="port-body" id="portBody"></div>
+    <div class="equity-wrap" id="equityWrap" hidden><div class="eq-stats" id="eqStats"></div><div class="eq-chart" id="eqChart"></div></div>
+  </section>
+</main>
+
+<footer class="foot">Simulatore didattico. Prezzi azionari storici reali (rettificati per split e dividendi, fonte Yahoo Finance); prezzi delle opzioni simulati con Black‑Scholes. Liquidazione a scadenza in contanti al valore intrinseco. Grafici: <a href="https://www.tradingview.com/lightweight-charts/" target="_blank" rel="noopener" style="color:inherit">TradingView Lightweight Charts</a>. Non è consulenza finanziaria.</footer>
+
+<!-- SETUP / CONFERMA -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">Nuova simulazione</h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="https://unpkg.com/lightweight-charts@5.0.8/dist/lightweight-charts.standalone.production.js"></script>
+<script src="js/model.js"></script>
+<script src="js/strategies.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
