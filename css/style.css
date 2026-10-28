@@ -287,3 +287,23 @@ button { cursor: pointer; }
 .symgrid button:hover { border-color: var(--accent); background: rgba(59,140,255,.14); }
 .symgrid .grp { grid-column: 1 / -1; font: 500 10px var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding-top: 6px; }
 @media (max-width: 1060px) { .wfilter { width: 150px; flex: none; } .watch { flex-direction: column; } }
+
+/* ---------- trader automatico ---------- */
+.btn.bot.on { background: rgba(43,191,110,.16); border-color: var(--up); color: var(--up); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.bot-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.bot-head .btn.primary { margin-left: auto; }
+.bot-note { font-size: 11px; }
+.bot-log-h { padding: 8px 10px 4px; font: 500 10px var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--dim); border-top: 1px solid var(--line); }
+.pt td.l { white-space: normal; min-width: 120px; }
+.pt input[type="checkbox"], .bot-head input[type="checkbox"] { accent-color: var(--accent); vertical-align: middle; }
+.fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px 12px; }
+.fgrid label { display: grid; gap: 3px; color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; }
+.fgrid label.fw { grid-column: 1 / -1; }
+.fgrid .inp, .fgrid .sel { width: 100%; text-transform: none; letter-spacing: 0; font-size: 12px; }
+.conds { display: grid; gap: 6px; }
+.cond-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.cond-row .sel { min-width: 0; max-width: 100%; }
+.cond-row .inp { width: 84px; }
+.cond-row .x { background: none; border: 0; color: var(--dim); font-size: 16px; padding: 0 6px; }
+.cond-row .x:hover { color: var(--sell); }

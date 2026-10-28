@@ -37,6 +37,7 @@
     <select id="speed" class="sel" title="Velocità riproduzione">
       <option value="1000">1 g/s</option><option value="400" selected>2,5 g/s</option><option value="150">7 g/s</option>
     </select>
+    <button class="btn bot" id="botToggle" type="button" title="Trader automatico: esegue le regole create nella scheda Automazioni">Bot: OFF</button>
   </div>
   <div class="time-info" id="timeInfo"></div>
 </div>
@@ -123,6 +124,7 @@
       <button type="button" data-t="pos">Portafoglio</button>
       <button type="button" data-t="closed">Chiuse</button>
       <button type="button" data-t="trades">Eseguiti</button>
+      <button type="button" data-t="bots">Automazioni</button>
       <button type="button" data-t="equity">Equity</button>
     </div>
     <div class="port-body" id="portBody"></div>
@@ -145,6 +147,7 @@
 <script src="https://unpkg.com/lightweight-charts@5.0.8/dist/lightweight-charts.standalone.production.js"></script>
 <script src="js/model.js"></script>
 <script src="js/strategies.js"></script>
+<script src="js/bot.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

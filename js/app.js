@@ -23,6 +23,7 @@ const App = {
   view: { tf: 'D', range: '6M', ind: { sma20: true, sma50: true, sma200: false, bb: false, em: true, pos: true } },
   selectedPos: null, tab: 'pos', playTimer: null,
   pages: [], pageIdx: 0, watchFilter: '',
+  bots: [], botOn: false, botPause: true,
 };
 
 /* ---------- persistenza (solo comodità locale) ---------- */
@@ -30,7 +31,8 @@ function save() {
   try {
     syncPage();
     localStorage.setItem(STORE_KEY, JSON.stringify({ date: App.date, sym: App.sym, expiry: App.expiry, acct: App.acct,
-      view: App.view, strikesEach: App.strikesEach, ticket: App.ticket, pages: App.pages, pageIdx: App.pageIdx }));
+      view: App.view, strikesEach: App.strikesEach, ticket: App.ticket, pages: App.pages, pageIdx: App.pageIdx,
+      bots: App.bots, botOn: App.botOn, botPause: App.botPause }));
   } catch (e) { /* storage non disponibile */ }
 }
 function load() {
@@ -40,7 +42,7 @@ function load() {
 /* ---------- conto ---------- */
 function newAccount(capital, date) {
   return { start: capital, cash: capital, positions: [], closed: [], trades: [], equity: [{ d: date, v: capital }],
-    realized: 0, commissions: 0, nextId: 1, startDate: date };
+    realized: 0, commissions: 0, nextId: 1, startDate: date, botLog: [], botState: {} };
 }
 
 const legQuote = (sym, l, date = App.date) => quote(sym, date, l.type, l.K, l.expiry);
@@ -119,7 +121,9 @@ function advance(n) {
   for (let k = i + 1; k <= target; k++) {
     App.date = cal[k];
     processExpirations();
+    const acted = runBots();
     recordEquity();
+    if (acted && App.botPause) { stopPlay(); break; }
   }
   onDateChanged();
 }
@@ -242,7 +246,7 @@ function transmit() {
   renderAll(); save();
 }
 
-function closePosition(id) {
+function closePosition(id, how = 'chiusa') {
   const a = App.acct;
   const g = a.positions.find(x => x.id === id);
   if (!g) return;
@@ -258,7 +262,7 @@ function closePosition(id) {
   a.commissions += comm;
   g.comm += comm; g.received += proceeds;
   logTrade('Chiusura', g, `${g.name} ${legsText(g.legs)} @ ${NF2.format(Math.abs(proceeds / MULT / g.n))} ${natural ? '(natural)' : '(mid)'}`, proceeds, comm);
-  finishGroup(g, 'chiusa');
+  finishGroup(g, how);
   recordEquity();
   renderAll(); save();
 }
@@ -686,6 +690,7 @@ function renderPortfolio() {
   $('#equityWrap').hidden = App.tab !== 'equity';
   body.hidden = App.tab === 'equity';
   if (App.tab === 'equity') { renderEquity(); return; }
+  if (App.tab === 'bots') { renderBots(body); return; }
   if (App.tab === 'pos') {
     if (!a.positions.length) {
       body.innerHTML = `<div class="empty-state">Nessuna posizione aperta. Scegli una strategia nel <b>Strategy Builder</b> o clicca bid/ask nella catena, poi premi <b>Trasmetti ordine</b>.</div>`;
@@ -839,7 +844,7 @@ function ensurePages() {
   }
 }
 function renderAll(forceRange) {
-  ensurePages(); renderPages();
+  ensurePages(); renderPages(); renderBotBadge();
   renderAcct(); renderTime(); renderWatch(); renderQuoteHeader();
   renderChart(forceRange); renderChain(); renderTicket(); renderPortfolio();
   $$('#tfSeg button').forEach(b => b.classList.toggle('on', b.dataset.tf === App.view.tf));
@@ -929,6 +934,7 @@ function bind() {
   $('#play').onclick = togglePlay;
   $('#speed').onchange = () => { if (App.playTimer) { stopPlay(); togglePlay(); } };
   $('#datePick').onchange = e => goTo(e.target.value);
+  $('#botToggle').onclick = toggleBot;
   $('#btnNew').onclick = () => setupModal(false);
 
   $('#watch').onclick = e => {
@@ -1012,6 +1018,7 @@ function bind() {
 
   $('#bottomTabs').onclick = e => { const b = e.target.closest('button'); if (!b) return; App.tab = b.dataset.t; renderPortfolio(); };
   $('#portBody').onclick = e => {
+    if (App.tab === 'bots') { botClick(e); return; }
     const b = e.target.closest('button[data-act]');
     if (b) {
       const id = +b.dataset.id;
@@ -1057,6 +1064,7 @@ function selectPosition(id) {
     Object.assign(App, { date: st.date, sym: st.sym, expiry: st.expiry, acct: st.acct, strikesEach: st.strikesEach || 10 });
     App.view = { ...App.view, ...st.view, ind: { ...App.view.ind, ...(st.view || {}).ind } };
     App.ticket = { ...App.ticket, ...st.ticket };
+    App.bots = st.bots || []; App.botOn = !!st.botOn; App.botPause = st.botPause !== false;
     if (st.pages && st.pages.length && st.pages.every(p => Market.series[p.sym])) {
       App.pages = st.pages; App.pageIdx = Math.min(st.pageIdx || 0, st.pages.length - 1);
       const p = App.pages[App.pageIdx];

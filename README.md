@@ -25,3 +25,11 @@ Riscarica gli ultimi 10 anni da Yahoo Finance in `data/`. Per aggiungere titoli 
 - Ordini eseguiti al close del giorno. Commissioni $0,65/contratto (min $1).
 - Margine: rischio massimo per strategie a rischio definito, Reg-T per posizioni scoperte.
 - Scadenza: liquidazione in contanti al valore intrinseco.
+
+## Trader automatico
+Scheda **Automazioni** + pulsante **Bot** nella barra del tempo. Ogni regola dice: *se* [condizioni] *allora* apri [strategia].
+- Condizioni (tutte insieme): IV Rank, IV, IV/HV, RSI 14, variazione 1/5 giorni, distanza dal massimo a 52 settimane, prezzo vs SMA 50/200, VIX, incroci delle medie, nuovi massimi/minimi.
+- Titoli: uno solo, solo ETF oppure tutti.
+- Ingresso: strategia, scadenza target, larghezza, delta, dimensione (contratti fissi o % di capitale a rischio), max posizioni, pausa tra aperture.
+- Uscita: target profit, stop loss (% del premio) e chiusura a DTE.
+- Le regole si valutano al close di ogni giorno simulato, anche con avanzamenti di settimane o mesi. “Verifica oggi” mostra su quali titoli la regola scatterebbe.
